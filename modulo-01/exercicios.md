@@ -95,10 +95,10 @@ Escreva um script que exiba, em linhas separadas:
 
 ---
 
-### 🟢 Exercício 02 – Inspecionando o Ambiente
+[### 🟢 Exercício 02 – Inspecionando o Ambiente
 Escreva um script que importe o módulo `sys` e exiba:
 1. A versão do Python instalada (`sys.version`)
-2. O sistema operacional em uso (`sys.platform`)
+2. O sistema operacional em uso (`sys.platform`)]()
 
 ---
 

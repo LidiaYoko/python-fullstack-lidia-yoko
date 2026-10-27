@@ -54,8 +54,31 @@ def salvar_nota(turma, aluno, nota1, nota2, nota3):
     # TODO (Passo 6): Abra o arquivo para escrita com open() e salve
     #                 com json.dump(). Use indent=4 para formatar.
 
-    pass  # ← apague esta linha e escreva seu código aqui
+    media = round((nota1 + nota2 + nota3) / 3, 2)
 
+    registro = {
+        "aluno": aluno,
+        "nota1": nota1,
+        "nota2": nota2,
+        "nota3": nota3,
+        "media": media
+    }
+
+    arquivo = os.path.join(
+        "notas",
+        f"{turma.replace(' ', '_')}.json"
+    )
+
+    if os.path.exists(arquivo):
+        with open(arquivo, "r", encoding="utf-8") as f:
+            dados = json.load(f)
+    else:
+        dados = []
+
+    dados.append(registro)
+
+    with open(arquivo, "w", encoding="utf-8") as f:
+        json.dump(dados, f, indent=4)
 
 def ler_notas(turma):
     """
@@ -84,4 +107,26 @@ def ler_notas(turma):
     #                 Média : 8.17
     #                 ─────────────────────────────
 
-    pass  # ← apague esta linha e escreva seu código aqui
+    arquivo = os.path.join(
+        "notas",
+        f"{turma.replace(' ', '_')}.json"
+    )
+
+    if not os.path.exists(arquivo):
+        print("Ainda não há registros para esta turma.")
+        return
+
+    with open(arquivo, "r", encoding="utf-8") as f:
+        dados = json.load(f)
+
+    print(f"\n─── Registros da {turma} ───────────────────")
+
+    for registro in dados:
+        print(f"Aluno : {registro['aluno']}")
+        print(
+            f"Nota 1: {registro['nota1']}  |  "
+            f"Nota 2: {registro['nota2']}  |  "
+            f"Nota 3: {registro['nota3']}"
+        )
+        print(f"Média : {registro['media']}")
+        print("────────────────────────────────────────────")
